@@ -5,11 +5,11 @@ Apriori Algorithm
 
 Apriori is an algorithm used to identify frequent item sets (in our case, item pairs). It does so using a "bottom up" approach, first identifying individual items that satisfy a minimum occurence threshold. It then extends the item set, adding one item at a time and checking if the resulting item set still satisfies the specified threshold. The algorithm stops when there are no more items to add that meet the minimum occurrence requirement. Here's an example of apriori in action, assuming a minimum occurence threshold of 3:
 
-                                                            order 1: apple, egg, milk  
-                                                            order 2: carrot, milk  
-                                                            order 3: apple, egg, carrot
-                                                            order 4: apple, egg
-                                                            order 5: apple, carrot
+                                                        order 1: apple, egg, milk  
+                                                        order 2: carrot, milk  
+                                                        order 3: apple, egg, carrot
+                                                        order 4: apple, egg
+                                                        order 5: apple, carrot
 
 
 Iteration 1:  Count the number of times each item occurs   
@@ -25,9 +25,9 @@ Iteration 1:  Count the number of times each item occurs
 
 Iteration 2: Build item sets of size 2 using the remaining items from Iteration 1 
 
-                                                                         (ie: apple, egg)  
-                                                            item set           occurence count  
-                                                            {apple, egg}             3  
+                                                                     (ie: apple, egg)  
+                                                        item set           occurence count  
+                                                        {apple, egg}             3  
 
 Only {apple, egg} remains and the algorithm stops since there are no more items to add.
 
@@ -42,7 +42,7 @@ Here are 3 key metrics to consider when evaluating association rules:
 support
     This is the percentage of orders that contains the item set. In the example above, there are 5 orders in total and {apple,egg} occurs in 3 of them, so:
 
-                                                               support{apple,egg} = 3/5 or 60%
+                                                       support{apple,egg} = 3/5 or 60%
 
    The minimum support threshold required by apriori can be set based on knowledge of your domain. In this grocery dataset for example, since there could be thousands of distinct items and an order can contain only a small fraction of these items, setting the support threshold to 0.01% may be reasonable.
 
@@ -50,11 +50,11 @@ support
 confidence
   Given two items, A and B, confidence measures the percentage of times that item B is purchased, given that item A was purchased. This is expressed as:
 
-                                                         confidence{A->B} = support{A,B} / support{A}   
+                                                   confidence{A->B} = support{A,B} / support{A}   
 
   Confidence values range from 0 to 1, where 0 indicates that B is never purchased when A is purchased, and 1 indicates that B is always purchased whenever A is purchased. Note that the confidence measure is directional. This means that we can also compute the percentage of times that item A is purchased, given that item B was purchased:
 
-                                                       confidence{B->A} = support{A,B} / support{B}    
+                                                   confidence{B->A} = support{A,B} / support{B}    
 
 In our example, the percentage of times that egg is purchased, given that apple was purchased is:
 
@@ -85,14 +85,14 @@ lift
 
 In summary, lift can take on the following values:
 
-                                               * lift = 1 implies no relationship between A and B. 
-                                                 (ie: A and B occur together only by chance)
+     * lift = 1 implies no relationship between A and B. 
+       (ie: A and B occur together only by chance)
 
-                                               * lift > 1 implies that there is a positive relationship between A and B.
-                                                 (ie:  A and B occur together more often than random)
+     * lift > 1 implies that there is a positive relationship between A and B.
+       (ie:  A and B occur together more often than random)
 
-                                               * lift < 1 implies that there is a negative relationship between A and B.
-                                                 (ie:  A and B occur together less often than random)
+     * lift < 1 implies that there is a negative relationship between A and B.
+       (ie:  A and B occur together less often than random)
 
 In our example, apple and egg occur together 1.25 times more than random, so we conclude that there exists a positive relationship between them.
 
